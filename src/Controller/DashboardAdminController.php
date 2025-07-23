@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+final class DashboardAdminController extends AbstractController
+{
+    #[Route('/dashboardAdmin', name: 'app_dashboard_admin')]
+    // Rajouter pour protéger la route
+     #[IsGranted('ROLE_ADMIN')]
+     // Encore plus de sécurisé ms c chiant
+     #[Route('/dashboardAdmin', name: 'app_dashboard_admin')]
+    public function dashboardAdmin(): Response
+    {
+        return $this->render('dashboard_admin/index.html.twig', [
+            'controller_name' => 'DashboardAdminController',
+        ]);
+    }
+}
